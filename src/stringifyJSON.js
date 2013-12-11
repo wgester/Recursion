@@ -28,13 +28,30 @@ var stringifyJSONhelper = function(obj){
 		}
 		var helperString = helperString + "]";
 		return helperString;
+	} else if (obj === null){
+		return "null";
 	} else if (typeof(obj) === "string"){
 		return "\"" + obj + "\"";
 	} else if (typeof(obj) === "number"){
-		return obj;
+		return obj.toString();
 	} else if (typeof(obj) === "boolean"){
 		return obj.toString();
-	} else if (obj === null){
-		return 'null';
-	}
+	} else if (obj.toString() === "[object Object]"){
+		if (Object.keys(obj).length === 0){
+			return "{}";
+		} else {
+			var helperString = "";
+			for (var i in obj){
+				if (i === undefined || obj[i] === undefined || typeof(i) === "function" || typeof(obj[i]) ==="function") {
+					return "{}";
+				} else if (Object.keys(obj)[0] === i){
+					helperString = "{" + stringifyJSONhelper(i) + ":" + stringifyJSONhelper(obj[i]);
+				} else {
+					helperString = helperString + "," + stringifyJSONhelper(i) + ":" + stringifyJSONhelper(obj[i]);
+				}
+			}
+		}
+		var helperString = helperString + "}";
+		return helperString;
+	} 
 };
