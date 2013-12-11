@@ -3,16 +3,6 @@
 
 // but you don't so you're going to have to write it from scratch:
 var stringifyJSON = function (obj) {
-	if (typeof(obj) === "string"){
-		return "\"" + (obj) + "\"";
-	} else if (typeof(obj) === "number"){
-		return "" + obj + "";
-	} else {
-		return stringifyJSONhelper(obj);
-	}
-};
-
-var stringifyJSONhelper = function(obj){
 	if (Array.isArray(obj)){
 		if (obj.length === 0){
 			return "[]";
@@ -20,9 +10,9 @@ var stringifyJSONhelper = function(obj){
 			var helperString = "";
 			for (var i = 0; i < obj.length; i ++){
 				if (i === 0){
-					helperString = "[" + stringifyJSONhelper(obj[i]);
+					helperString = "[" + stringifyJSON(obj[i]);
 				} else {
-					helperString = helperString + "," + stringifyJSONhelper(obj[i]);
+					helperString = helperString + "," + stringifyJSON(obj[i]);
 				}
 			}
 		}
@@ -45,9 +35,9 @@ var stringifyJSONhelper = function(obj){
 				if (i === undefined || obj[i] === undefined || typeof(i) === "function" || typeof(obj[i]) ==="function") {
 					return "{}";
 				} else if (Object.keys(obj)[0] === i){
-					helperString = "{" + stringifyJSONhelper(i) + ":" + stringifyJSONhelper(obj[i]);
+					helperString = "{" + stringifyJSON(i) + ":" + stringifyJSON(obj[i]);
 				} else {
-					helperString = helperString + "," + stringifyJSONhelper(i) + ":" + stringifyJSONhelper(obj[i]);
+					helperString = helperString + "," + stringifyJSON(i) + ":" + stringifyJSON(obj[i]);
 				}
 			}
 		}
