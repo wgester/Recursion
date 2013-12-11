@@ -34,5 +34,7 @@ var stringifyJSONhelper = function(obj){
 		return obj;
 	} else if (typeof(obj) === "boolean"){
 		return obj.toString();
+	} else if (obj === null){
+		return 'null';
 	}
 };
