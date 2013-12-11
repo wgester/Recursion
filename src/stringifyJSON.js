@@ -22,9 +22,7 @@ var stringifyJSON = function (obj) {
 		return "null";
 	} else if (typeof(obj) === "string"){
 		return "\"" + obj + "\"";
-	} else if (typeof(obj) === "number"){
-		return obj.toString();
-	} else if (typeof(obj) === "boolean"){
+	} else if (typeof(obj) === "number" || typeof(obj) === "boolean"){
 		return obj.toString();
 	} else if (obj.toString() === "[object Object]"){
 		if (Object.keys(obj).length === 0){
