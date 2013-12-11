@@ -32,5 +32,7 @@ var stringifyJSONhelper = function(obj){
 		return "\"" + obj + "\"";
 	} else if (typeof(obj) === "number"){
 		return obj;
+	} else if (typeof(obj) === "boolean"){
+		return obj.toString();
 	}
 };
