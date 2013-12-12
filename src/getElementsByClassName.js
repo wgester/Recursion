@@ -5,5 +5,32 @@
 
 // But in stead we're going to implement it from scratch:
 var getElementsByClassName = function (className) {
-  // your code here
+  var hotBod = document.body//.childNodes;
+  return getHelper(hotBod, className);
+};
+
+var getHelper = function(hotBodPre, className){
+    var hotBodKids = [];
+    var test = [];
+	if (hotBodPre.childNodes !== [] && hotBodPre.childNodes !== undefined){
+		var hotBod = hotBodPre.childNodes;
+	    for (var i = 0; i < hotBod.length; i ++){
+	  	  if (hotBod[i].classList !== undefined && hotBod[i] !== undefined){
+	  		  for (var j = 0; j < hotBod[i].classList.length; j ++){
+	  			  if (hotBod[i].classList[j] === className){
+	  				  hotBodKids.push(hotBod[i]);
+	  			  }
+	  		  }
+	  	  }
+		  var babyBod = getHelper(hotBod[i], className);
+		  if (Array.isArray(babyBod) && babyBod !== []){
+			  for (var k = 0; k < babyBod.length; k ++){
+				  if (babyBod[k] !== undefined){
+					  hotBodKids.push(babyBod[k]);
+				  }
+			  }
+		  }
+	    }
+	}
+    return hotBodKids;
 };
